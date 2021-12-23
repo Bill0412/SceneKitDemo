@@ -11,7 +11,8 @@
 		AFD76A4527705EB700358D87 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD76A4427705EB700358D87 /* ContentView.swift */; };
 		AFD76A4727705EC300358D87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFD76A4627705EC300358D87 /* Assets.xcassets */; };
 		AFD76A4A27705EC300358D87 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFD76A4927705EC300358D87 /* Preview Assets.xcassets */; };
-		AFF0182E27732AE800CD10B9 /* DataProcess.c in Sources */ = {isa = PBXBuildFile; fileRef = AFF0182D27732AE800CD10B9 /* DataProcess.c */; };
+		AFFF92332774704300BDFEA5 /* DataProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AFFF92312774704300BDFEA5 /* DataProcess.cpp */; };
+		AFFF92352774720700BDFEA5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AFFF92342774720700BDFEA5 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,8 +23,9 @@
 		AFD76A4927705EC300358D87 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AFD76A50277062C800358D87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AFF0182B27732AE700CD10B9 /* SceneKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SceneKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
-		AFF0182C27732AE800CD10B9 /* DataProcess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataProcess.h; sourceTree = "<group>"; };
-		AFF0182D27732AE800CD10B9 /* DataProcess.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = DataProcess.c; sourceTree = "<group>"; };
+		AFFF92312774704300BDFEA5 /* DataProcess.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DataProcess.cpp; sourceTree = "<group>"; };
+		AFFF92322774704300BDFEA5 /* DataProcess.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DataProcess.hpp; sourceTree = "<group>"; };
+		AFFF92342774720700BDFEA5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +42,7 @@
 		AFD76A3627705EB700358D87 = {
 			isa = PBXGroup;
 			children = (
+				AFFF92342774720700BDFEA5 /* README.md */,
 				AFD76A4127705EB700358D87 /* SceneKitDemo */,
 				AFD76A4027705EB700358D87 /* Products */,
 			);
@@ -61,9 +64,9 @@
 				AFD76A4427705EB700358D87 /* ContentView.swift */,
 				AFD76A4627705EC300358D87 /* Assets.xcassets */,
 				AFD76A4827705EC300358D87 /* Preview Content */,
-				AFF0182C27732AE800CD10B9 /* DataProcess.h */,
-				AFF0182D27732AE800CD10B9 /* DataProcess.c */,
 				AFF0182B27732AE700CD10B9 /* SceneKitDemo-Bridging-Header.h */,
+				AFFF92312774704300BDFEA5 /* DataProcess.cpp */,
+				AFFF92322774704300BDFEA5 /* DataProcess.hpp */,
 			);
 			path = SceneKitDemo;
 			sourceTree = "<group>";
@@ -135,6 +138,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFFF92352774720700BDFEA5 /* README.md in Resources */,
 				AFD76A4A27705EC300358D87 /* Preview Assets.xcassets in Resources */,
 				AFD76A4727705EC300358D87 /* Assets.xcassets in Resources */,
 			);
@@ -148,8 +152,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFD76A4527705EB700358D87 /* ContentView.swift in Sources */,
+				AFFF92332774704300BDFEA5 /* DataProcess.cpp in Sources */,
 				AFD76A4327705EB700358D87 /* SceneKitDemoApp.swift in Sources */,
-				AFF0182E27732AE800CD10B9 /* DataProcess.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
