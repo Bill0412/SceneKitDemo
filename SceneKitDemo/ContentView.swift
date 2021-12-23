@@ -8,6 +8,7 @@
 import SwiftUI
 import ARKit
 import RealityKit
+import SceneKit
 
 extension simd_float4x4 {
     func position() -> SCNVector3 {
@@ -18,26 +19,6 @@ extension simd_float4x4 {
         return simd_float3(columns.3.x, columns.3.y, columns.3.z)
     }
 }
-
-//extension SCNVector3 {
-//    static func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
-//        return SCNVector3(left.x + right.x, left.y + right.y, left.z + right.z)
-//    }
-//
-//    static func -(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
-//        return SCNVector3(left.x - right.x, left.y - right.y, left.z - right.z)
-//    }
-//
-//    static func /(left: SCNVector3, right: Float) -> SCNVector3 {
-//        return SCNVector3(left.x / right, left.y / right, left.z / right)
-//    }
-//
-//    func length(_ v: SCNVector3) -> Float {
-//        return sqrt(v.x * v.x + v.y * v.y + v.z * v.z)
-//    }
-//
-//}
-
 
 /**
  This is the SwiftUI version of the ARKitCube project.
@@ -99,6 +80,10 @@ struct SwiftUIARSCNView: UIViewRepresentable {
         weak var arKitSceneView: ARSCNView?
         var prevCameraTransform: simd_float4x4? = nil
         var counter = 0
+        var limiter = 0
+        var positions: [simd_float3] = []
+        var cylinderRootNode = SCNNode()
+        
         
         func redDot(position: simd_float4x4) -> SCNNode {
             let sphereNode = SCNNode(geometry: SCNSphere(radius: 0.001))
@@ -126,18 +111,49 @@ struct SwiftUIARSCNView: UIViewRepresentable {
             guard prevCameraTransform != nil else {
                 print("No previous camera transform matrix yet")
                 prevCameraTransform = frame.camera.transform
+                positions.append(frame.camera.transform.position())
                 return
             }
             
-            
-            
             if counter == 60 {
-
-                arKitSceneView?.scene.rootNode.addChildNode(
-                    CylinderNode(from: prevCameraTransform!.position(), to: frame.camera.transform.position()))
+                if limiter < 5 {
+                    limiter += 1
+                    cylinderRootNode.addChildNode(
+                        CylinderNode(from: prevCameraTransform!.position(), to: frame.camera.transform.position()))
+                    positions.append(frame.camera.transform.position())
+                    
+                    
+                    prevCameraTransform = frame.camera.transform
+                } else {
+                    // move the cylinders using C API
+                   
+                    let newCylinderRootNode = SCNNode()
+                    
+                    // add the points to the newCylinderRootNode after modifying using the C function
+                    
+                    // test: modify using swift
+//                    for i in 0..<(positions.count) {
+//                        positions[i] += simd_float3(0, 0.01, 0)
+//                    }
+//
+                    // test: modify using C API
+                    updatePositions(UnsafeMutablePointer(mutating: positions), CInt(positions.count))
+                    
+                    for i in 0..<(positions.count-1) {
+                        newCylinderRootNode.addChildNode(CylinderNode(from: positions[i], to: positions[i+1]))
+                    }
+                    cylinderRootNode.removeFromParentNode()
+                    
+                    // update cylinderRootNode
+                    cylinderRootNode = newCylinderRootNode
+                    
+                }
+                
+                if let isContain = arKitSceneView?.scene.rootNode.contains(cylinderRootNode), !isContain {
+                    arKitSceneView?.scene.rootNode.addChildNode(cylinderRootNode)
+                }
                 
                 counter = 0
-                prevCameraTransform = frame.camera.transform
             }
         }
     }
